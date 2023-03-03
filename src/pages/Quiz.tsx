@@ -158,16 +158,19 @@ export const Quiz = () => {
 
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
   const [wrongCount, setWrongCounter] = useState<number>(0);
-  const [correctCount, setCorrectCounter] = useState<number>(0);
-  // const { data, isLoading, error } = useFetch<Object>(
-  //     'https://the-trivia-api.com/api/questions?limit=20&categories=science,history'
-  // );
+  const [correctCount, setCorrectCounter] = useState<number>(0); 
+  const query = category === "Random" ? `https://the-trivia-api.com/api/questions?limit=20` : `https://the-trivia-api.com/api/questions?limit=20&categories=${category}`
+  const { data, isLoading, error } = useFetch<Array<any>>(
+    query
+  );
 
   const getQuestion = () => {
-    const question = questions[currentQuestion];
+    if(!data) return null;
+    const question = data ? (data as Array<any>)[currentQuestion] : [];
+
     const answers = shuffle([
       { isCorrect: true, option: question.correctAnswer },
-      ...question.incorrectAnswers.map((answer) => ({
+      ...question.incorrectAnswers.map((answer: any) => ({
         isCorrect: false,
         option: answer,
       })),
