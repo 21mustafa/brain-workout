@@ -11,9 +11,13 @@ export const Home = () => {
     if (data) {
       const categories = Object.keys(data);
       categories.push("Random");
-      return categories.map((category) => {
-        return <Link to={`quiz/${category}`}>{category}</Link>;
-      });
+      return <div className="link-con">
+          {categories.map((category) => {
+        return <Link className="link" to={`quiz/${category}`}>
+          {category}
+        </Link>;
+      })}
+      </div>;
     }
     return "Couldn't find any category";
   };
@@ -21,9 +25,9 @@ export const Home = () => {
   return (
     <>
       <img src={brainGif} alt="loading..." />
-      <h1>Brain Workout</h1>
+      <div className="text-h1"><h1>Brain Workout</h1></div>
 
-      <div>
+      <div className="categori">
         <h2>Categories: </h2>
         {isLoading
           ? "Categories are loading..."

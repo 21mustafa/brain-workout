@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import useFetch from "react-fetch-hook";
 import { useParams } from "react-router";
+import mapIcon from "../assets/map.png";
+import musicIcon from "../assets/music.png";
+import popcornIcon from "../assets/popcorn.png";
+import questionMarkIcon from "../assets/question-mark.png";
+import skiiIcon from "../assets/skii.png";
 
 const questions = [
   {
@@ -125,6 +130,27 @@ const questions = [
     isNiche: false,
   },
 ];
+
+function shuffle(array: any[]) {
+  let currentIndex = array.length,
+    randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+
+  return array;
+}
+
 export const Quiz = () => {
   const { category } = useParams();
 
@@ -137,28 +163,43 @@ export const Quiz = () => {
 
   const getQuestion = () => {
     const question = questions[currentQuestion];
+    const answers = shuffle([
+      { isCorrect: true, option: question.correctAnswer },
+      ...question.incorrectAnswers.map((answer) => ({
+        isCorrect: false,
+        option: answer,
+      })),
+    ]);
     return (
-      <div>
-        <h2>{question.question}</h2>
-        <div>
-          <button
-            onClick={() => {
-              setCurrentQuestion((prevVal) => prevVal + 1);
-              setCorrectCounter((prevVal) => prevVal + 1);
-            }}
-          >
-            {question.correctAnswer}
-          </button>
-          {question.incorrectAnswers.map((incorrectAnswer) => (
-            <button
-              onClick={() => {
-                setCurrentQuestion((prevVal) => prevVal + 1);
-                setWrongCounter((prevVal) => prevVal + 1);
-              }}
-            >
-              {incorrectAnswer}
-            </button>
-          ))}
+      <div className="quiz">
+        <div className="iconContainer top-icon">
+          <img className="q-icon" src={mapIcon} />
+          <img className="q-icon" src={musicIcon} />
+        </div>
+
+        <div className="quiz-section">
+          <h2 className="quiz-question">{question.question}</h2>
+          <div className="quiz-options">
+            {answers.map((option) => (
+              <button
+                className="quiz-option"
+                onClick={() => {
+                  setCurrentQuestion((prevVal) => prevVal + 1);
+                  if (option.isCorrect) {
+                    setCorrectCounter((prevVal) => prevVal + 1);
+                  } else {
+                    setWrongCounter((prevVal) => prevVal + 1);
+                  }
+                }}
+              >
+                {option.option}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="iconContainer bottom-icon">
+          <img className="q-icon" src={popcornIcon} />
+          <img className="q-icon" src={skiiIcon} />
         </div>
       </div>
     );
@@ -166,13 +207,13 @@ export const Quiz = () => {
 
   const getResults = () => {
     return (
-        <div>
-            <h2>Results</h2>
-            <div>Wrong Answers: {wrongCount}</div>
-            <div>Correct Answers: {correctCount}</div>
-        </div>
-    )
-  }
+      <div>
+        <h2>Results</h2>
+        <div>Wrong Answers: {wrongCount}</div>
+        <div>Correct Answers: {correctCount}</div>
+      </div>
+    );
+  };
 
   return <>{currentQuestion === 10 ? getResults() : getQuestion()}</>;
 };

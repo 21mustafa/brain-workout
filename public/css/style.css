@@ -1,0 +1,92 @@
+.text-hr {
+  text-align: center;
+  font-family: fantasy;
+  font-weight: bold; }
+
+.link {
+  padding: 3rem;
+  margin: 1rem;
+  background-color: #cddc39c7;
+  width: 7rem;
+  border-radius: 10px;
+  text-decoration: none;
+  font-family: fantasy;
+  color: blue;
+  font-weight: bold; }
+
+.link-con {
+  display: flex;
+  text-align: center;
+  flex-wrap: wrap; }
+
+.categori {
+  font-family: fantasy;
+  font-weight: bold; }
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+  border-radius: 10px; }
+
+h1 {
+  text-align: center;
+  font-family: fantasy;
+  font-weight: bold; }
+
+body {
+  margin: 0; }
+
+.quiz {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 100vh;
+  justify-content: center; }
+  .quiz-option {
+    padding: 1rem;
+    margin: 1rem;
+    background-color: white;
+    width: 20rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: fantasy;
+    font-weight: bold;
+    text-align: left;
+    cursor: pointer;
+    transform: scale(1);
+    transition: all 0.2s; }
+    .quiz-option:hover {
+      transform: scale(1.2); }
+  .quiz-question {
+    font-family: fantasy;
+    background: #cddc39c7;
+    padding: 1rem 0; }
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center; }
+
+.quiz-section {
+  background-color: white;
+  margin: 6rem;
+  border-radius: 1rem;
+  padding: 3rem 0;
+  border: 2px solid; }
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  width: 100vw; }
+  .iconContainer.top-icon {
+    top: 11rem; }
+  .iconContainer.bottom-icon {
+    bottom: 10rem; }
+
+.q-icon {
+  width: 12%;
+  max-width: 7rem; }

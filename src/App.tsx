@@ -2,7 +2,6 @@ import React from "react";
 import { Home } from "./pages/Home";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { Quiz } from "./pages/Quiz";
-import { Results } from "./pages/Result";
 
 function App() {
   return (
