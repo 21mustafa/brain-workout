@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import useFetch from "react-fetch-hook";
 import { Link } from "react-router-dom";
 import brainGif from "../assets/brain-workout.gif";

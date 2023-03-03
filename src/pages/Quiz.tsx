@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import useFetch from "react-fetch-hook";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import mapIcon from "../assets/map.png";
 import musicIcon from "../assets/music.png";
 import popcornIcon from "../assets/popcorn.png";
 import questionMarkIcon from "../assets/question-mark.png";
 import skiiIcon from "../assets/skii.png";
+import retryIcon from "../assets/retry.png";
 
 const questions = [
   {
@@ -172,6 +174,14 @@ export const Quiz = () => {
     ]);
     return (
       <div className="quiz">
+        <div className="meter nostripes">
+          <span
+            className="meter-c"
+            style={{
+              width: ((wrongCount + correctCount + 1) / 10) * 100 + "%",
+            }}
+          ></span>
+        </div>
         <div className="iconContainer top-icon">
           <img className="q-icon" src={mapIcon} />
           <img className="q-icon" src={musicIcon} />
@@ -207,10 +217,14 @@ export const Quiz = () => {
 
   const getResults = () => {
     return (
-      <div>
-        <h2>Results</h2>
-        <div>Wrong Answers: {wrongCount}</div>
-        <div>Correct Answers: {correctCount}</div>
+      <div className="results">
+        <h2 className="results-header">Results</h2>
+        <div className="result-section">
+          <div className="result-wrong">Wrong Answers: {wrongCount}
+         </div>
+          <div className="result-right">Correct Answers: {correctCount}</div>
+        </div>
+        <Link className="retry" to={"/"}><img className="retry-icon" src={retryIcon} /></Link>
       </div>
     );
   };
